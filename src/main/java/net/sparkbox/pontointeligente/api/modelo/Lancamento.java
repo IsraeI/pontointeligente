@@ -41,7 +41,7 @@ public class Lancamento implements Serializable {
 	private String localizacao;
 	@Column(name = "data_criacao", nullable = false)
 	private Date dataCriacao;
-	@Column(name = "data_atualizacao", nullable = false)
+	@Column(name = "data_atualizacao", nullable = true)
 	private Date dataAtualizacao;
 
 	@Enumerated(EnumType.STRING)
@@ -58,5 +58,125 @@ public class Lancamento implements Serializable {
 		return "Lancamento [id=" + id + ", data=" + data + ", descricao=" + descricao + ", localizacao=" + localizacao
 				+ ", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtualizacao + ", tipo=" + tipo
 				+ ", funcionario=" + funcionario + "]";
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the data
+	 */
+	public Date getData() {
+		return data;
+	}
+
+	/**
+	 * @param data
+	 *            the data to set
+	 */
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	/**
+	 * @return the descricao
+	 */
+	public String getDescricao() {
+		return descricao;
+	}
+
+	/**
+	 * @param descricao
+	 *            the descricao to set
+	 */
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	/**
+	 * @return the localizacao
+	 */
+	public String getLocalizacao() {
+		return localizacao;
+	}
+
+	/**
+	 * @param localizacao
+	 *            the localizacao to set
+	 */
+	public void setLocalizacao(String localizacao) {
+		this.localizacao = localizacao;
+	}
+
+	/**
+	 * @return the dataCriacao
+	 */
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+
+	/**
+	 * @param dataCriacao
+	 *            the dataCriacao to set
+	 */
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	/**
+	 * @return the dataAtualizacao
+	 */
+	public Date getDataAtualizacao() {
+		return dataAtualizacao;
+	}
+
+	/**
+	 * @param dataAtualizacao
+	 *            the dataAtualizacao to set
+	 */
+	public void setDataAtualizacao(Date dataAtualizacao) {
+		this.dataAtualizacao = dataAtualizacao;
+	}
+
+	/**
+	 * @return the tipo
+	 */
+	public TipoEnum getTipo() {
+		return tipo;
+	}
+
+	/**
+	 * @param tipo
+	 *            the tipo to set
+	 */
+	public void setTipo(TipoEnum tipo) {
+		this.tipo = tipo;
+	}
+
+	/**
+	 * @return the funcionario
+	 */
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	/**
+	 * @param funcionario
+	 *            the funcionario to set
+	 */
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 }

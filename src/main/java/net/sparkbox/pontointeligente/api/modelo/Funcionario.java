@@ -60,7 +60,7 @@ public class Funcionario implements Serializable {
 
 	@Column(name = "data_criacao", nullable = false)
 	private Date dataCriacao;
-	@Column(name = "data_atualizacao", nullable = false)
+	@Column(name = "data_atualizacao", nullable = true)
 	private Date dataAtualizacao;
 
 	@ManyToOne(fetch = FetchType.EAGER)
