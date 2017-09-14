@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.sparkbox.pontointeligente.api.controllers.response.Response;
-import net.sparkbox.pontointeligente.api.dto.CadastroPJDto;
+import net.sparkbox.pontointeligente.api.dto.CadastroPJDTO;
 import net.sparkbox.pontointeligente.api.modelo.Empresa;
 import net.sparkbox.pontointeligente.api.modelo.Funcionario;
 import net.sparkbox.pontointeligente.api.modelo.enums.PerfilEnum;
@@ -57,10 +57,10 @@ public class CadastroPJController {
 	 * @throws NoSuchAlgorithmException
 	 */
 	@PostMapping
-	public ResponseEntity<Response<CadastroPJDto>> cadastrar(@Valid @RequestBody CadastroPJDto cadastroPJDto,
+	public ResponseEntity<Response<CadastroPJDTO>> cadastrar(@Valid @RequestBody CadastroPJDTO cadastroPJDto,
 			BindingResult result) throws NoSuchAlgorithmException {
 		log.info("Cadastrando PJ: {}", cadastroPJDto.toString());
-		Response<CadastroPJDto> response = new Response<CadastroPJDto>();
+		Response<CadastroPJDTO> response = new Response<CadastroPJDTO>();
 
 		validarDadosExistentes(cadastroPJDto, result);
 		Empresa empresa = this.converterDtoParaEmpresa(cadastroPJDto);
@@ -86,7 +86,7 @@ public class CadastroPJController {
 	 * @param cadastroPJDto
 	 * @param result
 	 */
-	private void validarDadosExistentes(CadastroPJDto cadastroPJDto, BindingResult result) {
+	private void validarDadosExistentes(CadastroPJDTO cadastroPJDto, BindingResult result) {
 		this.empresaService.buscarPorCnpj(cadastroPJDto.getCnpj())
 				.ifPresent(emp -> result.addError(new ObjectError("empresa", "Empresa já existente.")));
 
@@ -103,7 +103,7 @@ public class CadastroPJController {
 	 * @param cadastroPJDto
 	 * @return Empresa
 	 */
-	private Empresa converterDtoParaEmpresa(CadastroPJDto cadastroPJDto) {
+	private Empresa converterDtoParaEmpresa(CadastroPJDTO cadastroPJDto) {
 		Empresa empresa = new Empresa();
 		empresa.setCnpj(cadastroPJDto.getCnpj());
 		empresa.setRazaoSocial(cadastroPJDto.getRazaoSocial());
@@ -119,7 +119,7 @@ public class CadastroPJController {
 	 * @return Funcionario
 	 * @throws NoSuchAlgorithmException
 	 */
-	private Funcionario converterDtoParaFuncionario(CadastroPJDto cadastroPJDto, BindingResult result)
+	private Funcionario converterDtoParaFuncionario(CadastroPJDTO cadastroPJDto, BindingResult result)
 			throws NoSuchAlgorithmException {
 		Funcionario funcionario = new Funcionario();
 		funcionario.setNome(cadastroPJDto.getNome());
@@ -137,8 +137,8 @@ public class CadastroPJController {
 	 * @param funcionario
 	 * @return CadastroPJDto
 	 */
-	private CadastroPJDto converterCadastroPJDto(Funcionario funcionario) {
-		CadastroPJDto cadastroPJDto = new CadastroPJDto();
+	private CadastroPJDTO converterCadastroPJDto(Funcionario funcionario) {
+		CadastroPJDTO cadastroPJDto = new CadastroPJDTO();
 		cadastroPJDto.setId(funcionario.getId());
 		cadastroPJDto.setNome(funcionario.getNome());
 		cadastroPJDto.setEmail(funcionario.getEmail());

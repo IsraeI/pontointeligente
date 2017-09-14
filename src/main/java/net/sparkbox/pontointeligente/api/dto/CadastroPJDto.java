@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.br.CPF;
  * @author Israel
  *
  */
-public class CadastroPJDto {
+public class CadastroPJDTO {
 	private Long id;
 
 	@NotEmpty(message = "Nome não pode ser vazio.")

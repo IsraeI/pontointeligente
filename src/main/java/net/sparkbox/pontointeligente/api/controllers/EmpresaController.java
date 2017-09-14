@@ -3,6 +3,10 @@
  */
 package net.sparkbox.pontointeligente.api.controllers;
 
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.sparkbox.pontointeligente.api.controllers.response.Response;
+import net.sparkbox.pontointeligente.api.dto.EmpresaDTO;
 import net.sparkbox.pontointeligente.api.modelo.Empresa;
 import net.sparkbox.pontointeligente.api.services.EmpresaService;
 
@@ -35,12 +41,12 @@ public class EmpresaController {
 	 * Retorna uma empresa dado um CNPJ.
 	 * 
 	 * @param cnpj
-	 * @return ResponseEntity<Response<EmpresaDto>>
+	 * @return ResponseEntity<Response<EmpresaDTO>>
 	 */
 	@GetMapping(value = "/cnpj/{cnpj}")
-	public ResponseEntity<Response<EmpresaDto>> buscarPorCnpj(@PathVariable("cnpj") String cnpj) {
+	public ResponseEntity<Response<EmpresaDTO>> buscarPorCnpj(@PathVariable("cnpj") String cnpj) {
 		log.info("Buscando empresa por CNPJ: {}", cnpj);
-		Response<EmpresaDto> response = new Response<EmpresaDto>();
+		Response<EmpresaDTO> response = new Response<EmpresaDTO>();
 		Optional<Empresa> empresa = empresaService.buscarPorCnpj(cnpj);
 
 		if (!empresa.isPresent()) {
@@ -49,7 +55,7 @@ public class EmpresaController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		response.setData(this.converterEmpresaDto(empresa.get()));
+		response.setData(this.converterEmpresaDTO(empresa.get()));
 		return ResponseEntity.ok(response);
 	}
 
@@ -57,10 +63,10 @@ public class EmpresaController {
 	 * Popula um DTO com os dados de uma empresa.
 	 * 
 	 * @param empresa
-	 * @return EmpresaDto
+	 * @return EmpresaDTO
 	 */
-	private EmpresaDto converterEmpresaDto(Empresa empresa) {
-		EmpresaDto empresaDto = new EmpresaDto();
+	private EmpresaDTO converterEmpresaDTO(Empresa empresa) {
+		EmpresaDTO empresaDto = new EmpresaDTO();
 		empresaDto.setId(empresa.getId());
 		empresaDto.setCnpj(empresa.getCnpj());
 		empresaDto.setRazaoSocial(empresa.getRazaoSocial());
