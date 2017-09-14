@@ -5,9 +5,13 @@ package net.sparkbox.pontointeligente.api.services.impl;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.sparkbox.pontointeligente.api.modelo.Funcionario;
+import net.sparkbox.pontointeligente.api.repositories.FuncionarioRepository;
 import net.sparkbox.pontointeligente.api.services.FuncionarioService;
 
 /**
@@ -16,6 +20,10 @@ import net.sparkbox.pontointeligente.api.services.FuncionarioService;
  */
 @Service
 public class FuncionarioServiceImpl implements FuncionarioService {
+	private static final Logger log = LoggerFactory.getLogger(FuncionarioServiceImpl.class);
+
+	@Autowired
+	private FuncionarioRepository funcionarioRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -26,8 +34,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	 */
 	@Override
 	public Funcionario persistir(Funcionario funcionario) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Persistindo funcionário: {}", funcionario);
+		return this.funcionarioRepository.save(funcionario);
 	}
 
 	/*
@@ -39,8 +47,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	 */
 	@Override
 	public Optional<Funcionario> buscarPorCpf(String cpf) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Buscando funcionário pelo CPF {}", cpf);
+		return Optional.ofNullable(this.funcionarioRepository.findByCpf(cpf));
 	}
 
 	/*
@@ -52,8 +60,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	 */
 	@Override
 	public Optional<Funcionario> buscarPorEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Buscando funcionário pelo email {}", email);
+		return Optional.ofNullable(this.funcionarioRepository.findByEmail(email));
 	}
 
 	/*
@@ -65,8 +73,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	 */
 	@Override
 	public Optional<Funcionario> buscarPorId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Buscando funcionário pelo IDl {}", id);
+		return Optional.ofNullable(this.funcionarioRepository.findOne(id));
 	}
 
 }

@@ -5,11 +5,15 @@ package net.sparkbox.pontointeligente.api.services.impl;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import net.sparkbox.pontointeligente.api.modelo.Lancamento;
+import net.sparkbox.pontointeligente.api.repositories.LancamentoRepository;
 import net.sparkbox.pontointeligente.api.services.LancamentoService;
 
 /**
@@ -18,6 +22,10 @@ import net.sparkbox.pontointeligente.api.services.LancamentoService;
  */
 @Service
 public class LancamentoServiceImpl implements LancamentoService {
+	private static final Logger log = LoggerFactory.getLogger(LancamentoServiceImpl.class);
+
+	@Autowired
+	private LancamentoRepository lancamentoRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -28,8 +36,8 @@ public class LancamentoServiceImpl implements LancamentoService {
 	 */
 	@Override
 	public Page<Lancamento> buscarPorFuncionarioId(Long funcionarioId, PageRequest pageRequest) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Buscando lançamentos para o funcionário ID {}", funcionarioId);
+		return this.lancamentoRepository.findByFuncionarioId(funcionarioId, pageRequest);
 	}
 
 	/*
@@ -41,8 +49,8 @@ public class LancamentoServiceImpl implements LancamentoService {
 	 */
 	@Override
 	public Optional<Lancamento> buscarPorId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Buscando um lançamento pelo ID {}", id);
+		return Optional.ofNullable(this.lancamentoRepository.findOne(id));
 	}
 
 	/*
@@ -54,8 +62,8 @@ public class LancamentoServiceImpl implements LancamentoService {
 	 */
 	@Override
 	public Lancamento persistir(Lancamento lancamento) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Persistindo o lançamento: {}", lancamento);
+		return this.lancamentoRepository.save(lancamento);
 	}
 
 	/*
@@ -67,7 +75,8 @@ public class LancamentoServiceImpl implements LancamentoService {
 	 */
 	@Override
 	public void remover(Long id) {
-		// TODO Auto-generated method stub
+		log.info("Removendo o lançamento ID {}", id);
+		this.lancamentoRepository.delete(id);
 
 	}
 
