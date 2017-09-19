@@ -40,6 +40,9 @@ public class CadastroPJDTO {
 	@CNPJ(message = "CNPJ inválido.")
 	private String cnpj;
 
+	public CadastroPJDTO() {
+	}
+
 	@Override
 	public String toString() {
 		return "CadastroPJDto [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cpf=" + cpf
