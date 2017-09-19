@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.br.CPF;
  * @author Israel
  *
  */
-public class CadastroPJDTO {
+public class CadastroPJDTO2 {
 	private Long id;
 
 	@NotEmpty(message = "Nome não pode ser vazio.")
@@ -40,7 +40,7 @@ public class CadastroPJDTO {
 	@CNPJ(message = "CNPJ inválido.")
 	private String cnpj;
 
-	public CadastroPJDTO() {
+	public CadastroPJDTO2() {
 	}
 
 	@Override
