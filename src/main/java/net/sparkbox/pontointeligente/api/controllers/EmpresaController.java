@@ -1,6 +1,6 @@
 /**
- * 
- */
+* 
+*/
 package net.sparkbox.pontointeligente.api.controllers;
 
 import java.util.Optional;
