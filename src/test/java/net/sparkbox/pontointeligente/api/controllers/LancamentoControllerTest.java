@@ -106,7 +106,7 @@ public class LancamentoControllerTest {
 				.willReturn(Optional.of(new Lancamento()));
 
 		mvc.perform(MockMvcRequestBuilders.delete(URL_BASE + ID_LANCAMENTO).accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isForbidden());
+				.andExpect(status().isUnauthorized());
 	}
 
 	private String obterJsonRequisicaoPost() throws JsonProcessingException {
